@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<th:block th:replace="/fragments/layout :: header"></th:block>
+<title>User Management | Portal </title>
+<style>
+.switchery-small {
+    border-radius: 6px;
+    height: 10px;
+    width: 23px;
+}
+.switchery-small > small {
+    height: 10px;
+    width: 10px;
+}
+.dropdown-item {
+    padding: 0px 1.5rem;
+}
+</style>
+</head>
+<body class="sticky-header">
+	<section>
+		<div th:replace="/fragments/layout :: sidebar-left"></div>
+		<!-- body content start-->
+		<div class="body-content">
+			<div th:replace="/fragments/layout :: head-section"></div>
+			<!-- -------------------B-----O----D----Y-------------------------------------- -->
+			<div class="container-fluid">
+				<div class="page-head"></div>
+				<div class="row">
+					<div class="col-lg-12 col-sm-12">
+						<div class="card-title tab-2">
+							<div class="tab-content p-4 bg-white">
+								<div class="tab-pane active p-4" id="about">
+									<div class="row justify-content-center">
+										<div class="col-md-12  profile-detail">
+											<div class="text-center">
+												<i class="fa  fa-users "></i>
+												<h5>Users List</h5>
+												<div class="profile-border my-3"></div>
+												<p class="detail-text"></p>
+
+											</div>
+											<div class="row mt-5">
+												<div class="col-md-12">
+													<div class="presonal-inform">
+				                                        <div class="table-responsive-sm">
+				                                        	<a th:href="@{/users/new}" data-toggle="tooltip" data-placement="top" title="Add User"><i class="fa fa-grav"></i></a>
+				                                            <table class="table">
+													            <thead>
+													                <tr>
+													                    <th>Id</th>
+													                    <th>Email</th>
+													                    <th>Roles</th>
+													                    <th>Action</th>
+
+													                </tr>
+													            </thead>
+													            <tbody>
+													                <tr th:each="user : ${users}">
+													                    <td th:text="${user.id}"></td>
+													                    <td th:text="${user.email}"></td>
+													                    <td>
+																			<span th:each="role,iterStat : ${user.roles}">
+																				<span th:text="${role.name}"></span>
+																				<th:block th:if="${!iterStat.last}">,</th:block>
+																			</span>
+													                    </td>
+													                    <td>
+													                    	<a th:href="@{/users/{id}/view(id=${user.id})}"  data-toggle="tooltip" data-placement="top" title="View "><i class="fa fa-eye" style="font-size: 1em; color: #424858;"></i></a>&nbsp
+													                    	<span sec:authorize="hasRole('ROLE_ADMIN')">
+													                    		<a th:href="@{/users/{id}/assignRoles(id=${user.id})}"  data-toggle="tooltip" data-placement="top" title="Assign Role "><i class="fa fa-id-badge" style="font-size: 1em; color: #424858;"></i></a>&nbsp
+													                        	<a th:href="@{/users/{id}/update(id=${user.id})}"  data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil" style="font-size: 1em; color: #4cb04e;"></i></a>&nbsp
+													                        	<a th:href="@{users/{id}/delete(id=${user.id})}" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa  fa-trash" style="font-size: 1em; color: #ff5450;"></i></a>
+													                        </span>
+													                    </td>
+													                </tr>
+													            </tbody>
+				                                            </table>
+				                                        </div> 
+													</div>
+												</div>
+											</div>
+											<!--END ROW-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!--end row-->
+
+			</div>
+			<!--end container-->
+			<!-- ------------------B-----O----D----Y---------E---N---D--S---------------- -->
+			<footer th:replace="/fragments/layout :: footer"></footer>
+		</div>
+		<!--end body content-->
+	</section>
+
+	<th:block th:replace="/fragments/layout :: footer-js-includes"></th:block>
+	<script>
+		
+	</script>
+</body>
+</html>

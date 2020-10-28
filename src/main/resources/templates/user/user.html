@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<th:block th:replace="/fragments/layout :: header"></th:block>
+<title>Portal</title>
+<style>
+</style>
+</head>
+<body class="sticky-header">
+	<section>
+		<div th:replace="/fragments/layout :: sidebar-left"></div>
+		<!-- body content start-->
+		<div class="body-content">
+			<div th:replace="/fragments/layout :: head-section"></div>
+			<!-- -------------------B-----O----D----Y-------------------------------------- -->
+			<div class="container-fluid">
+				<div class="page-head"></div>
+				<div class="row">
+					<div class="col-lg-12 col-sm-12">
+						<div class="card-title tab-2">
+							<div class="tab-content p-4 bg-white">
+								<div class="tab-pane active p-4" id="about">
+									<div class="row justify-content-center">
+										<div class="col-md-12  profile-detail">
+											<div class="text-center">
+												<i class="fa fa-vcard "></i>
+												<h5>Profile</h5>
+												<div class="profile-border my-3"></div>
+												<p class="detail-text"></p>
+
+											</div>
+											<div class="row mt-5">
+												<div class="col-md-12">
+													<div class="presonal-inform">
+														<ul class="list-unstyled">
+															<li><b>Email Id:</b><Span th:text="${user.email}"></Span></li>
+															<li><b>Roles:</b> <th:block
+																	th:each="r, iter:${#authentication.getAuthorities()}">
+																	<span th:text="${r}"></span>
+																	<th:block th:if="${!iter.last}">, </th:block>
+																</th:block>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+											<!--END ROW-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!--end row-->
+
+			</div>
+			<!--end container-->
+			<!-- ------------------B-----O----D----Y---------E---N---D--S---------------- -->
+			<footer th:replace="/fragments/layout :: footer"></footer>
+		</div>
+		<!--end body content-->
+	</section>
+
+	<th:block th:replace="/fragments/layout :: footer-js-includes"></th:block>
+	<script>
+		
+		</script>
+</body>
+</html>
